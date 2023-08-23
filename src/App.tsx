@@ -1,24 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
+import { AppBar, Toolbar, Typography, Container } from '@mui/material';
+import { AccountCircle } from '@mui/icons-material';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6">Material-UI React App</Typography>
+          <div style={{ flexGrow: 1 }} />
+          <AccountCircle />
+        </Toolbar>
+      </AppBar>
+      <Container maxWidth="sm" style={{ marginTop: '2rem' }}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          Welcome to Material-UI!
+        </Typography>
+        <Typography variant="body1">
+          This is a simple example of using Material-UI components in a React app.
+        </Typography>
+      </Container>
     </div>
   );
 }
