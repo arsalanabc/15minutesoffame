@@ -1,4 +1,4 @@
-import { ImageFields } from "../App";
+import { ImageFields } from "../screen/Home";
 
 export async function fetchApi(endpoint: string, options: RequestInit = {}) {
     const response = await fetch(`https://your-api-url.com/${endpoint}`, options);

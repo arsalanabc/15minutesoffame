@@ -1,5 +1,5 @@
 import { Typography, Container, Card, CardMedia } from '@mui/material';
-import { ImageFields } from '../../App';
+import { ImageFields } from '../../screen/Home';
 
 function ImageCard ({id, link, image}:ImageFields) {
   return (
