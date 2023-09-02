@@ -2,9 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { AppBar, Toolbar, Typography, Container, Switch } from '@mui/material';
 import { AccountCircle, Route, Router } from '@mui/icons-material';
 import { getTodaysFame } from '../api/ApiClient';
-import FrameCard from '../components/MainView/FrameCard';
-import YoutubeCard from '../components/YoutubeCard';
-import TwitterCard from '../components/TwitterCard';
 import { InstagramEmbed, TwitterEmbed, YouTubeEmbed } from 'react-social-media-embed';
 import ImageCard from '../components/MainView/ImageCard';
 
@@ -32,7 +29,6 @@ function Home() {
           <Typography variant="body1">
             This is a simple example of using Material-UI components in a React app.
           </Typography>
-
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <ImageCard link='' id='' image='https://images.unsplash.com/photo-1481349518771-20055b2a7b24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cmFuZG9tfGVufDB8fDB8fHww&w=1000&q=80' />
           </div>
