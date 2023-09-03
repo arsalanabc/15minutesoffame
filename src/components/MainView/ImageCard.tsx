@@ -1,10 +1,10 @@
-import { Typography, Container, Card, CardMedia } from '@mui/material';
-import { ImageFields } from '../../screen/Home';
+import React from 'react'
+import { Container, Card, CardMedia } from '@mui/material'
 
-function ImageCard ({id, link, image}:ImageFields) {
+function ImageCard ({ image }: { image: string }): React.ReactElement {
   return (
       <Container maxWidth="sm" style={{ marginTop: '2rem' }}>
-     
+
         <Card style={{ marginTop: '2rem' }}>
           <CardMedia
             component="img"
@@ -14,7 +14,7 @@ function ImageCard ({id, link, image}:ImageFields) {
           />
         </Card>
       </Container>
-  );
+  )
 }
 
-export default ImageCard;
+export default ImageCard
