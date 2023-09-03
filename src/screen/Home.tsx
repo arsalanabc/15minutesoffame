@@ -12,7 +12,7 @@ export interface PostFields {
   type: PostTypes
 }
 
-function getCardByPostTyme ({ data }: { data: PostFields }): React.ReactElement | null {
+function getCardByPostType ({ data }: { data: PostFields }): React.ReactElement | null {
   switch (data.type) {
     case PostTypes.Image:
       return (
@@ -63,7 +63,7 @@ function Home (): React.ReactElement {
         <HeaderBar title='15 minutes of fame' redirectPage='submit' />
         <Container maxWidth="sm" style={{ marginTop: '2rem' }}>
 
-          {(data === undefined) ? defaultPost() : getCardByPostTyme({ data })}
+          {(data === undefined) ? defaultPost() : getCardByPostType({ data })}
 
         </Container>
       </div>
