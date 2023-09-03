@@ -1,22 +1,33 @@
-import React from 'react';
-import { AppBar, Toolbar, Typography } from '@mui/material';
-import { AccountCircle } from '@mui/icons-material';
-import { type } from 'os';
+import React from 'react'
+import { AppBar, Link, Toolbar, Typography } from '@mui/material'
 
-export type HeaderTypes = {
+export interface HeaderTypes {
   title: string
+  redirectPage: string
 }
 
-function HeaderBar({title}: HeaderTypes) {
+function getRedirectPage (redirectTo: string): React.ReactElement {
+  if (redirectTo === 'submit') {
+    return (<Link href="/submit" color={'#fff'}>
+      <Typography variant="h6">Submit</Typography>
+    </Link>)
+  } else {
+    return (<Link href="/" color={'#fff'}>
+    <Typography variant="h6">Home</Typography>
+  </Link>)
+  }
+}
+
+function HeaderBar ({ title, redirectPage }: HeaderTypes): React.ReactElement {
   return (
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6">{title}</Typography>
           <div style={{ flexGrow: 1 }} />
-          <AccountCircle />
+          {getRedirectPage(redirectPage)}
         </Toolbar>
       </AppBar>
-  );
+  )
 }
 
-export default HeaderBar;
+export default HeaderBar
