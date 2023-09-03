@@ -4,6 +4,7 @@ import { AccountCircle, Route, Router } from '@mui/icons-material';
 import { getTodaysFame } from '../api/ApiClient';
 import { InstagramEmbed, TwitterEmbed, YouTubeEmbed } from 'react-social-media-embed';
 import ImageCard from '../components/MainView/ImageCard';
+import HeaderBar from '../components/HeaderBar';
 
 export type ImageFields = {
   id: string,
@@ -22,6 +23,7 @@ function Home() {
 
   return (
       <div className="App">
+        <HeaderBar title='15 minutes of fame' />
         <Container maxWidth="sm" style={{ marginTop: '2rem' }}>
           <Typography variant="h4" component="h1" gutterBottom>
             Welcome to Material-UI!
