@@ -88,12 +88,12 @@ function PostForm (): React.ReactElement {
           style={{ marginBottom: '16px' }}
         />
         <FormControl fullWidth variant="outlined" required>
-          <InputLabel>Dropdown</InputLabel>
+          <InputLabel>Post Type</InputLabel>
           <Select
             name="dropdown"
             value={formData.dropdown}
             onChange={handleInputChange}
-            label="Dropdown"
+            label="Post Type"
           >
             {getPostTypesOptions()}
           </Select>
