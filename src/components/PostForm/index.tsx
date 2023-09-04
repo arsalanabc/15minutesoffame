@@ -5,7 +5,7 @@ import { PostTypes } from '../../api/ApiClient'
 export interface FormData { email: string, link: string, dropdown: string }
 
 function getPostTypesOptions (): React.ReactElement[] {
-  const postTypes = Object.keys(PostTypes).filter(i => (isNaN(Number(i))))
+  const postTypes = Object.keys(PostTypes).filter(i => (isNaN(Number(i)))).sort()
 
   const options: React.ReactElement[] = []
 

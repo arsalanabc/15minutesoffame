@@ -1,10 +1,14 @@
 import { type PostFields } from '../screen/Home'
 
 export enum PostTypes {
-  Instagram,
-  YouTube,
-  Twitter,
-  Image
+  Instagram = 'Instagram',
+  YouTube = 'YouTube',
+  Twitter = 'Twitter',
+  Image = 'Image',
+  Facebook = 'Facebook',
+  LinkedIn = 'LinkedIn',
+  Pinterest = 'Pinterest',
+  TikTok = 'TikTok'
 }
 
 export async function fetchApi (endpoint: string, options: RequestInit = {}): Promise<Response> {
