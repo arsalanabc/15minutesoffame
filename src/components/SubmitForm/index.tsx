@@ -38,7 +38,7 @@ function EmailForm (): React.ReactElement {
         />
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <Typography variant="body1">
-            Please enter a valid email address. An email will be sent with a link to create a post.
+            Please enter a valid email address. An email will be sent with the link to create a post.
           </Typography>
         </div>
         <Button
