@@ -1,9 +1,9 @@
+import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import App from './App'
 import Home from './screen/Home'
 import Submit from './screen/submit'
 
-function AppRoutes () {
+function AppRoutes (): React.ReactElement {
   return (
         <Routes>
           <Route path="/" element={<Home />} />
