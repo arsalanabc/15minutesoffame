@@ -1,4 +1,7 @@
+import { type PostSubmitType } from '../components/PostForm'
 import { type PostFields } from '../screen/Home'
+
+const api = 'http://localhost:8080'
 
 export enum PostTypes {
   Instagram = 'Instagram',
@@ -17,6 +20,35 @@ export async function fetchApi (endpoint: string, options: RequestInit = {}): Pr
     throw new Error(`API error: ${response.status} ${response.statusText}`)
   }
   return await response.json()
+}
+
+export async function submitPostRequest (email: string): Promise<Response> {
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email })
+  }
+
+  return await fetch(`${api}/post-request`, requestOptions)
+}
+
+export async function submitPost (post: PostSubmitType): Promise<Response> {
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(post)
+  }
+
+  return await fetch(`${api}/post`, requestOptions)
+}
+
+export async function getPostRequest (uniqueCode: string): Promise<Response> {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' }
+  }
+
+  return await fetch(`${api}/post-request/${uniqueCode}`, requestOptions)
 }
 
 export async function getTodaysFame (): Promise<PostFields> {

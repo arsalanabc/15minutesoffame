@@ -1,8 +1,20 @@
 import { Button, Container, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
-import { PostTypes } from '../../api/ApiClient'
+import { PostTypes, getPostRequest, submitPost } from '../../api/ApiClient'
 
-export interface FormData { email: string, link: string, dropdown: string }
+// enum POST_TYPES {
+//   Instagram = 0,
+//   YouTube = 1,
+//   Twitter = 2,
+//   Image = 3,
+//   Facebook = 4,
+//   LinkedIn = 5,
+//   Pinterest = 6,
+//   TikTok = 7
+// }
+
+export interface FormData { uniqueCode: string, link: string, postType: string }
+export interface PostSubmitType { uniqueCode: string, link: string, postType: string }
 
 function getPostTypesOptions (): React.ReactElement[] {
   const postTypes = Object.keys(PostTypes).filter(i => (isNaN(Number(i)))).sort()
@@ -16,11 +28,25 @@ function getPostTypesOptions (): React.ReactElement[] {
   return options
 }
 
-function PostForm (): React.ReactElement {
+function PostForm ({ uniqueCode }: { uniqueCode: string }): React.ReactElement {
+  const [responseText, setResponseTest] = useState<string>('')
+  const [isUniqueCodeValide, setIsUniqueCodeValide] = useState<boolean>(false)
   const [formData, setFormData] = useState<FormData>({
-    email: '',
+    uniqueCode,
     link: '',
-    dropdown: ''
+    postType: ''
+  })
+
+  useState(() => {
+    getPostRequest(uniqueCode).then((response) => {
+      if (response.status === 200) {
+        setIsUniqueCodeValide(true)
+      } else {
+        setResponseTest('This link is either invalid or expired!')
+      }
+    }).catch((e) => {
+      setResponseTest(e)
+    })
   })
 
   const [isFormValid, setFormValid] = useState(false)
@@ -45,27 +71,27 @@ function PostForm (): React.ReactElement {
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   function handleSubmit (e: React.FormEvent) {
     e.preventDefault()
+    submitPost(formData).then(data => {}).catch(console.error)
     // Handle form submission here
     console.log('Form Data:', formData)
   }
 
-  const validateForm = ({ email, link, dropdown }: FormData): boolean => {
-    // Add your validation logic here
-    // For example, you can use regular expressions for email and link validation
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  const validateForm = ({ link, postType }: FormData): boolean => {
     const linkPattern = /^https?:\/\/\S+$/
 
-    const isDropdownValid = dropdown !== ''
+    const isPostTypeValid = postType !== ''
 
-    return emailPattern.test(email) && linkPattern.test(link) && isDropdownValid
+    return linkPattern.test(link) && isPostTypeValid
   }
 
   return (
     <Container maxWidth="sm" >
-      <form onSubmit={handleSubmit}>
+      { !isUniqueCodeValide
+        ? <Typography variant="h4" style={{ marginBottom: '16px' }}> {responseText} </Typography>
+        : <form onSubmit={handleSubmit}>
         <Typography variant="h4" style={{ marginBottom: '16px' }}> Submit a post </Typography>
 
-        <TextField
+        {/* <TextField
           fullWidth
           label="Email"
           variant="outlined"
@@ -75,7 +101,7 @@ function PostForm (): React.ReactElement {
           onChange={handleInputChange}
           required
           style={{ marginBottom: '16px' }}
-        />
+        /> */}
         <TextField
           fullWidth
           label="Link"
@@ -90,8 +116,8 @@ function PostForm (): React.ReactElement {
         <FormControl fullWidth variant="outlined" required>
           <InputLabel>Post Type</InputLabel>
           <Select
-            name="dropdown"
-            value={formData.dropdown}
+            name="postType"
+            value={formData.postType}
             onChange={handleInputChange}
             label="Post Type"
           >
@@ -107,7 +133,7 @@ function PostForm (): React.ReactElement {
         >
           Submit
         </Button>
-      </form>
+      </form> }
     </Container>
   )
 }

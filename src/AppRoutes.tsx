@@ -14,7 +14,7 @@ function AppRoutes (): React.ReactElement {
   return (
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/submit/:id" element={<Submit />} />
+          <Route path="/submit/:uniqueCode" element={<Submit />} />
           <Route path="/submit" element={<Submit />} />
           <Route path="/*" element={<PageNotFound />} />
 
