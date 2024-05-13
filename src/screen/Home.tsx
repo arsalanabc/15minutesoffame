@@ -13,6 +13,17 @@ export interface PostFields {
   type: PostTypes
 }
 
+export interface PostResponse {
+  id: string
+  title: string
+  user_id: number
+  post_type: string
+  unique_code: string
+  link: string
+  created_at: Date
+  updated_at: Date
+}
+
 function getCardByPostType ({ data }: { data: PostFields }): React.ReactElement | null {
   switch (data.type) {
     case PostTypes.Image:
@@ -55,7 +66,15 @@ function Home (): React.ReactElement {
 
   useEffect(() => {
     getTodaysFame()
-      .then((data: PostFields) => { setData(data) })
+      .then(async d => await d.json())
+      .then((data: PostResponse) => {
+        setData({
+          id: data.id,
+          link: data.link,
+          image: '',
+          type: PostTypes[data.post_type as PostTypes]
+        })
+      })
       .catch((error: any) => { console.error(error) })
   }, [])
 
