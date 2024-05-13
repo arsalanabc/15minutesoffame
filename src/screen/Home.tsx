@@ -4,6 +4,7 @@ import { PostTypes, getTodaysFame } from '../api/ApiClient'
 import { InstagramEmbed, TwitterEmbed, YouTubeEmbed } from 'react-social-media-embed'
 import ImageCard from '../components/MainView/ImageCard'
 import HeaderBar from '../components/HeaderBar'
+import CountdownTimer from '../components/Timer/CountdownTimer'
 
 export interface PostFields {
   id: string
@@ -62,8 +63,8 @@ function Home (): React.ReactElement {
       <div className="App">
         <HeaderBar title='15 minutes of fame' redirectPage='submit' />
         <Container maxWidth="sm" style={{ marginTop: '2rem' }}>
-
           {(data === undefined) ? defaultPost() : getCardByPostType({ data })}
+          <CountdownTimer targetDate={new Date(Date.now() + 15 * 60 * 1000)} />
 
         </Container>
       </div>
